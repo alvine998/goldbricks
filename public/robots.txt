@@ -1,0 +1,25 @@
+# Midland Properti - Robots.txt
+# Allow all search engine crawlers by default
+User-agent: *
+Allow: /
+
+# Disallow admin, sensitive paths
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /password-reset
+Disallow: /*.json
+Disallow: /*?*
+
+# Crawl delay
+Crawl-delay: 1
+
+# Specific search engine optimizations
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap location
+Sitemap: https://midlandproperti.local/sitemap.xml
