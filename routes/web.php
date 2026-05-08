@@ -9,8 +9,11 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 // ─── SEO ────────────────────────────────────────────────────────────────────
@@ -62,6 +65,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Organization CRUD
         Route::resource('organizations', OrganizationController::class)->names('organizations');
+
+        // Agents CRUD
+        Route::resource('agents', AgentController::class)->names('agents');
+
+        // Banks CRUD
+        Route::resource('banks', BankController::class)->names('banks');
+
+        // Testimonials CRUD
+        Route::resource('testimonials', TestimonialController::class)->names('testimonials');
 
         // Articles CRUD
         Route::resource('articles', ArticleController::class)->names('articles');

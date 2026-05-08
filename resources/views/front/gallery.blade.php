@@ -24,10 +24,11 @@
                 @foreach($gallery as $item)
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galleryModal"
-                         data-img="{{ asset('storage/' . $item->image) }}"
                          data-title="{{ $item->title }}"
-                         data-desc="{{ $item->description }}">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title ?? 'Galeri' }}" loading="lazy" width="300" height="250">
+                         data-desc="{{ $item->description }}"
+                         data-images="{{ json_encode(!empty($item->images) && is_array($item->images) ? $item->images : [$item->image]) }}"
+                         onclick="showGalleryModal(this)">
+                        <img src="{{ str_starts_with($item->image, 'http') ? $item->image : asset('storage/' . $item->image) }}" alt="{{ $item->title ?? 'Galeri' }}" loading="lazy" width="300" height="250">
                         <div class="gallery-overlay">
                             <i class="bi bi-zoom-in"></i>
                         </div>
@@ -50,14 +51,23 @@
 <!-- Gallery Modal -->
 <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-dark border-0">
+        <div class="modal-content bg-white border-0">
             <div class="modal-header border-0 pb-0">
-                <h6 class="modal-title text-white" id="galleryModalTitle"></h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                <h6 class="modal-title text-dark" id="galleryModalTitle"></h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body text-center">
-                <img id="galleryModalImg" src="" class="img-fluid rounded" alt="">
-                <p id="galleryModalDesc" class="text-white-50 small mt-2 mb-0"></p>
+            <div class="modal-body text-center position-relative">
+                <img id="galleryModalImg" src="" class="img-fluid rounded" alt="" style="max-height:70vh;object-fit:cover">
+                <p id="galleryModalDesc" class="text-muted small mt-2 mb-0"></p>
+                <!-- Image counter -->
+                <small class="text-muted" id="imageCounter" style="display:none;margin-top:0.5rem"></small>
+                <!-- Navigation buttons -->
+                <button type="button" id="prevBtn" class="btn btn-sm btn-dark position-absolute start-0 top-50 translate-middle-y ms-2" style="display:none;z-index:10">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button type="button" id="nextBtn" class="btn btn-sm btn-dark position-absolute end-0 top-50 translate-middle-y me-2" style="display:none;z-index:10">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -65,12 +75,56 @@
 
 @push('scripts')
 <script>
-document.querySelectorAll('.gallery-item').forEach(el => {
-    el.addEventListener('click', function() {
-        document.getElementById('galleryModalImg').src = this.dataset.img;
-        document.getElementById('galleryModalTitle').textContent = this.dataset.title || '';
-        document.getElementById('galleryModalDesc').textContent = this.dataset.desc || '';
-    });
+let currentGalleryImages = [];
+let currentImageIndex = 0;
+
+function showGalleryModal(element) {
+    const images = JSON.parse(element.dataset.images || '[]');
+    const title = element.dataset.title || '';
+    const desc = element.dataset.desc || '';
+    
+    currentGalleryImages = images;
+    currentImageIndex = 0;
+    
+    document.getElementById('galleryModalTitle').textContent = title;
+    document.getElementById('galleryModalDesc').textContent = desc;
+    document.getElementById('galleryModalImg').src = images[0] || '';
+    
+    // Show/hide navigation
+    if (images.length > 1) {
+        document.getElementById('prevBtn').style.display = 'block';
+        document.getElementById('nextBtn').style.display = 'block';
+        document.getElementById('imageCounter').style.display = 'block';
+        document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${images.length}`;
+    } else {
+        document.getElementById('prevBtn').style.display = 'none';
+        document.getElementById('nextBtn').style.display = 'none';
+        document.getElementById('imageCounter').style.display = 'none';
+    }
+}
+
+document.getElementById('prevBtn')?.addEventListener('click', function() {
+    if (currentImageIndex > 0) {
+        currentImageIndex--;
+        document.getElementById('galleryModalImg').src = currentGalleryImages[currentImageIndex];
+        document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+    }
+});
+
+document.getElementById('nextBtn')?.addEventListener('click', function() {
+    if (currentImageIndex < currentGalleryImages.length - 1) {
+        currentImageIndex++;
+        document.getElementById('galleryModalImg').src = currentGalleryImages[currentImageIndex];
+        document.getElementById('imageCounter').textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (document.getElementById('galleryModal').classList.contains('show')) {
+        if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+        if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+    }
 });
 </script>
 @endpush

@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class Testimonial extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'image',
-        'images',
-        'description',
+        'name',
+        'position',
+        'company',
+        'message',
+        'photo',
+        'rating',
         'sort_order',
     ];
 
     protected $casts = [
-        'images' => 'array',
+        'rating' => 'integer',
     ];
 }

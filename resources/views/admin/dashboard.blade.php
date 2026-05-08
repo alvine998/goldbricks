@@ -5,7 +5,7 @@
 <div class="d-flex align-items-center justify-content-between mb-4">
     <div>
         <div class="page-title">Dashboard</div>
-        <div class="page-subtitle">Selamat datang di CMS Midland Properti</div>
+        <div class="page-subtitle">Selamat datang di CMS Goldbricks Realtors</div>
     </div>
     <a href="{{ route('home') }}" target="_blank" class="btn btn-sm btn-outline-primary">
         <i class="bi bi-box-arrow-up-right me-1"></i>Lihat Website
@@ -17,7 +17,7 @@
     <div class="col-sm-6 col-xl-3">
         <div class="card stat-card shadow-sm">
             <div class="d-flex align-items-center gap-3">
-                <div class="stat-icon" style="background:rgba(26,92,58,0.1)">
+                <div class="stat-icon" style="background:rgba(15,45,94,0.1)">
                     <i class="bi bi-buildings" style="color:var(--primary)"></i>
                 </div>
                 <div>

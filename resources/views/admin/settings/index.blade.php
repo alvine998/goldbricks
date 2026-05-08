@@ -53,7 +53,7 @@
                     <div class="mb-3">
                         <label class="form-label fw-medium small">Nama Website</label>
                         <input type="text" name="site_name" class="form-control" maxlength="100"
-                               value="{{ old('site_name', $settings['site_name'] ?? 'Midland Properti') }}" required>
+                               value="{{ old('site_name', $settings['site_name'] ?? 'Goldbricks Realtors') }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-medium small">Tagline</label>
@@ -76,7 +76,7 @@
                         <label class="form-label fw-medium small">Email</label>
                         <input type="email" name="contact_email" class="form-control" maxlength="100"
                                value="{{ old('contact_email', $settings['contact_email'] ?? '') }}"
-                               placeholder="info@midlandproperti.com">
+                               placeholder="info@goldbricks.com">
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-medium small">Telepon</label>
@@ -99,13 +99,13 @@
                         <label class="form-label fw-medium small">Instagram URL</label>
                         <input type="text" name="social_instagram" class="form-control"
                                value="{{ old('social_instagram', $settings['social_instagram'] ?? '') }}"
-                               placeholder="https://instagram.com/midlandproperti">
+                               placeholder="https://instagram.com/goldbricksrealtors">
                     </div>
                     <div class="mb-0">
                         <label class="form-label fw-medium small">Facebook URL</label>
                         <input type="text" name="social_facebook" class="form-control"
                                value="{{ old('social_facebook', $settings['social_facebook'] ?? '') }}"
-                               placeholder="https://facebook.com/midlandproperti">
+                               placeholder="https://facebook.com/goldbricksrealtors">
                     </div>
                 </div>
             </div>

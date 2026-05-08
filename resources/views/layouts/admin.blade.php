@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMS Admin - @yield('title', 'Dashboard') | Midland Properti</title>
+    <title>CMS Admin - @yield('title', 'Dashboard') | Goldbricks Realtors</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
     @stack('styles')
     <style>
         :root {
-            --primary: #1a5c3a;
-            --primary-light: #2a8a52;
+            --primary: #0f2d5e;
+            --primary-light: #1a4a8a;
             --gold: #c9a84c;
             --sidebar-w: 260px;
         }
@@ -69,7 +69,7 @@
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('admin.dashboard') }}">
-            <i class="bi bi-building me-2"></i>Midland CMS
+            <i class="bi bi-building me-2"></i>Goldbricks CMS
         </a>
         <div class="mt-1">
             <span class="badge bg-warning text-dark" style="font-size:0.6rem">Admin Panel</span>
@@ -96,6 +96,15 @@
         </a>
         <a href="{{ route('admin.organizations.index') }}" class="nav-link {{ request()->routeIs('admin.organizations*') ? 'active' : '' }}">
             <i class="bi bi-people"></i> Organisasi
+        </a>
+        <a href="{{ route('admin.agents.index') }}" class="nav-link {{ request()->routeIs('admin.agents*') ? 'active' : '' }}">
+            <i class="bi bi-person-badge"></i> Agen
+        </a>
+        <a href="{{ route('admin.banks.index') }}" class="nav-link {{ request()->routeIs('admin.banks*') ? 'active' : '' }}">
+            <i class="bi bi-bank"></i> Bank KPR
+        </a>
+        <a href="{{ route('admin.testimonials.index') }}" class="nav-link {{ request()->routeIs('admin.testimonials*') ? 'active' : '' }}">
+            <i class="bi bi-chat-quote"></i> Testimoni
         </a>
 
         <div class="nav-section mt-2">Pengaturan</div>

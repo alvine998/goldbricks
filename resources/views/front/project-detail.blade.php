@@ -91,17 +91,48 @@
                             </div>
                         </div>
                         @endif
-                        @if($project->pic_phone)
-                        <a href="https://wa.me/{{ $project->pic_phone }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-gold w-100 mb-2">
-                            <i class="bi bi-whatsapp me-2"></i>Chat dengan {{ $project->pic_name }}
-                        </a>
+                        
+                        <!-- Chat Buttons -->
+                        @php $agents = $project->agents()->limit(5)->get(); @endphp
+                        @if($agents->count() > 0)
+                            <!-- Multiple PICs Dropdown -->
+                            <div class="dropdown mb-2">
+                                <button class="btn btn-gold w-100 dropdown-toggle" type="button" id="picDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-whatsapp me-2"></i>Chat dengan Tim Kami
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="picDropdown" style="min-width:250px">
+                                    @foreach($agents as $agent)
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center gap-2" href="https://wa.me/{{ $agent->whatsapp ?? \App\Models\Setting::get('social_whatsapp', '') }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($project->title) }}" target="_blank">
+                                                @if($agent->photo)
+                                                    <img src="{{ str_starts_with($agent->photo, 'http') ? $agent->photo : asset('storage/' . $agent->photo) }}" class="rounded-circle" style="width:36px;height:36px;object-fit:cover" alt="{{ $agent->name }}">
+                                                @else
+                                                    <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:36px;height:36px;background:var(--primary);color:white;font-size:0.9rem">
+                                                        {{ substr($agent->name, 0, 1) }}
+                                                    </div>
+                                                @endif
+                                                <div>
+                                                    <div class="fw-medium" style="color:var(--primary)">{{ $agent->name }}</div>
+                                                    <small class="text-muted">{{ $agent->position }}</small>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @elseif($project->pic_phone)
+                            <!-- Single PIC (legacy) -->
+                            <a href="https://wa.me/{{ $project->pic_phone }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-gold w-100 mb-2">
+                                <i class="bi bi-whatsapp me-2"></i>Chat dengan {{ $project->pic_name }}
+                            </a>
                         @else
-                        @php $whatsapp = \App\Models\Setting::get('social_whatsapp'); @endphp
-                        @if($whatsapp)
-                        <a href="https://wa.me/{{ preg_replace('/\D/', '', $whatsapp) }}?text=Halo,%20saya%20tertarik%20dengan%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-gold w-100 mb-2">
-                            <i class="bi bi-whatsapp me-2"></i>Chat via WhatsApp
-                        </a>
-                        @endif
+                            <!-- Default WhatsApp -->
+                            @php $whatsapp = \App\Models\Setting::get('social_whatsapp'); @endphp
+                            @if($whatsapp)
+                            <a href="https://wa.me/{{ preg_replace('/\D/', '', $whatsapp) }}?text=Halo,%20saya%20tertarik%20dengan%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-gold w-100 mb-2">
+                                <i class="bi bi-whatsapp me-2"></i>Chat via WhatsApp
+                            </a>
+                            @endif
                         @endif
                         <a href="{{ route('contact') }}" class="btn btn-outline-secondary w-100">
                             <i class="bi bi-envelope me-2"></i>Kirim Pesan
@@ -141,9 +172,38 @@
                             @if($property->location)
                                 <p class="text-muted small mb-3"><i class="bi bi-geo-alt me-1"></i>{{ $property->location }}</p>
                             @endif
-                            <a href="https://wa.me/{{ $project->pic_phone ?? \App\Models\Setting::get('social_whatsapp', '') }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-sm btn-gold w-100">
-                                <i class="bi bi-whatsapp me-1"></i>Hubungi
-                            </a>
+                            <!-- Agent Dropdown for Property -->
+                            @php $agentsList = $project->agents()->limit(5)->get(); @endphp
+                            @if($agentsList->count() > 0)
+                                <div class="dropdown mb-2 w-100">
+                                    <button class="btn btn-sm btn-gold w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-whatsapp me-1"></i>Hubungi
+                                    </button>
+                                    <ul class="dropdown-menu w-100" style="min-width:200px">
+                                        @foreach($agentsList as $agent)
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="https://wa.me/{{ $agent->whatsapp ?? \App\Models\Setting::get('social_whatsapp', '') }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}" target="_blank">
+                                                    @if($agent->photo)
+                                                        <img src="{{ str_starts_with($agent->photo, 'http') ? $agent->photo : asset('storage/' . $agent->photo) }}" class="rounded-circle" style="width:28px;height:28px;object-fit:cover" alt="{{ $agent->name }}">
+                                                    @else
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width:28px;height:28px;background:var(--primary);color:white;font-size:0.75rem;flex-shrink:0">
+                                                            {{ substr($agent->name, 0, 1) }}
+                                                        </div>
+                                                    @endif
+                                                    <div class="text-start" style="font-size:0.9rem">
+                                                        <div class="fw-medium" style="color:var(--primary)">{{ $agent->name }}</div>
+                                                        <small class="text-muted">{{ $agent->position }}</small>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @else
+                                <a href="https://wa.me/{{ $project->pic_phone ?? \App\Models\Setting::get('social_whatsapp', '') }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}" target="_blank" class="btn btn-sm btn-gold w-100 mb-2">
+                                    <i class="bi bi-whatsapp me-1"></i>Hubungi
+                                </a>
+                            @endif
                             <a href="{{ route('property.show', $property->slug) }}" class="btn btn-sm btn-outline-secondary w-100 mt-2">
                                 <i class="bi bi-eye me-1"></i>Lihat Detail
                             </a>

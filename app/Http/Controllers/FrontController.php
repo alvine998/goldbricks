@@ -7,6 +7,7 @@ use App\Models\Page;
 use App\Models\Project;
 use App\Models\Property;
 use App\Models\Article;
+use App\Models\Agent;
 use App\Models\Setting;
 
 class FrontController extends Controller
@@ -120,11 +121,12 @@ class FrontController extends Controller
     {
         $page = Page::findBySlug('about');
         $organizations = \App\Models\Organization::orderBy('sort_order')->get();
+        $agents = Agent::orderBy('sort_order')->get();
         $seo = $this->seo(
-            'Tentang Kami - Midland Properti',
-            'Kenali tim profesional Midland Properti yang siap membantu Anda menemukan properti impian. Visi, misi, dan keunggulan kami.'
+            'Tentang Kami - Goldbricks Realtors',
+            'Kenali tim profesional Goldbricks Realtors yang siap membantu Anda menemukan properti impian. Visi, misi, dan keunggulan kami.'
         );
-        return view('front.about', array_merge($this->nav(), compact('page', 'organizations'), $seo));
+        return view('front.about', array_merge($this->nav(), compact('page', 'organizations', 'agents'), $seo));
     }
 
     public function contact()

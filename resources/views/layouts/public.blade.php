@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Midland Properti - Agen Properti Terpercaya') | {{ $site_name ?? 'Midland Properti' }}</title>
-    <meta name="description" content="@yield('meta_description', 'Midland Properti adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
-    <meta name="keywords" content="properti, rumah, apartemen, ruko, kavling, jual beli properti, agen properti jakarta">
-    <meta name="author" content="Midland Properti">
+    <title>@yield('title', 'Goldbricks Realtors - Agen Properti Terpercaya') | {{ $site_name ?? 'Goldbricks Realtors' }}</title>
+    <meta name="description" content="@yield('meta_description', 'Goldbricks Realtors Indonesia adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
+    <meta name="keywords" content="properti, rumah, apartemen, ruko, kavling, jual beli properti, agen properti jakarta, goldbricks">
+    <meta name="author" content="Goldbricks Realtors">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="{{ url()->current() }}">
     <!-- Open Graph -->
-    <meta property="og:site_name" content="Midland Properti">
+    <meta property="og:site_name" content="Goldbricks Realtors">
     <meta property="og:type" content="@yield('og_type', 'website')">
-    <meta property="og:title" content="@yield('title', 'Midland Properti - Agen Properti Terpercaya')">
-    <meta property="og:description" content="@yield('meta_description', 'Midland Properti adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
+    <meta property="og:title" content="@yield('title', 'Goldbricks Realtors - Agen Properti Terpercaya')">
+    <meta property="og:description" content="@yield('meta_description', 'Goldbricks Realtors Indonesia adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-image.jpg'))">
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', 'Midland Properti - Agen Properti Terpercaya')">
-    <meta name="twitter:description" content="@yield('meta_description', 'Midland Properti adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
+    <meta name="twitter:title" content="@yield('title', 'Goldbricks Realtors - Agen Properti Terpercaya')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Goldbricks Realtors Indonesia adalah agen properti terpercaya dengan berbagai pilihan rumah, apartemen, ruko, dan kavling di Jakarta.')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/og-image.jpg'))">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,13 +29,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a5c3a;
-            --primary-light: #2a8a52;
+            --primary: #0f2d5e;
+            --primary-light: #1a4a8a;
             --gold: #c9a84c;
             --gold-light: #e8c97a;
-            --dark: #111827;
+            --dark: #0a1628;
             --gray: #6b7280;
-            --light-bg: #f3f8f5;
+            --light-bg: #eef2f8;
         }
         * { box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; color: var(--dark); background: #fff; }
@@ -54,10 +54,10 @@
         .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28201,168,76,0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
 
         /* Hero */
-        .hero-section { min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, #0d3321 100%); }
+        .hero-section { min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, #071a3e 100%); }
         .hero-section::after { content: ''; position: absolute; inset: 0; background: url('/images/hero-pattern.svg') center/cover no-repeat; opacity: 0.05; }
         .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,92,58,0.92) 50%, rgba(26,92,58,0.6) 100%); }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,45,94,0.92) 50%, rgba(15,45,94,0.6) 100%); }
         .hero-content { position: relative; z-index: 2; }
         .hero-badge { display: inline-block; background: var(--gold); color: var(--primary); font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 2px; margin-bottom: 1.2rem; }
         .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); color: #fff; line-height: 1.15; margin-bottom: 1.2rem; }
@@ -99,10 +99,10 @@
         .gallery-overlay i { font-size: 2rem; color: var(--gold); }
 
         /* CTA */
-        .cta-section { background: linear-gradient(135deg, var(--primary) 0%, #0d3321 100%); }
+        .cta-section { background: linear-gradient(135deg, var(--primary) 0%, #071a3e 100%); }
 
         /* Footer */
-        footer { background: #061c12; }
+        footer { background: #060f1e; }
         footer .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); }
         footer p, footer a { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
         footer a:hover { color: var(--gold); text-decoration: none; }
@@ -110,7 +110,7 @@
         footer .footer-divider { border-color: rgba(255,255,255,0.1); }
 
         /* Breadcrumb */
-        .page-header { background: linear-gradient(135deg, var(--primary) 0%, #0d3321 100%); padding: 5rem 0 3rem; }
+        .page-header { background: linear-gradient(135deg, var(--primary) 0%, #071a3e 100%); padding: 5rem 0 3rem; }
         .page-header h1 { color: #fff; font-size: 2.5rem; }
         .page-header .breadcrumb-item, .page-header .breadcrumb-item a { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
         .page-header .breadcrumb-item.active { color: var(--gold); }
@@ -131,7 +131,7 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "Midland Properti",
+      "name": "Goldbricks Realtors",
       "description": "Agen properti terpercaya dengan berbagai pilihan properti terbaik",
       "image": "{{ asset('images/logo.png') }}",
       "url": "{{ route('home') }}",
@@ -141,7 +141,7 @@
         "addressCountry": "ID"
       },
       "telephone": "{{ \App\Models\Setting::get('contact_phone', '+62 21-1234-5678') }}",
-      "email": "{{ \App\Models\Setting::get('contact_email', 'info@midlandproperti.com') }}",
+      "email": "{{ \App\Models\Setting::get('contact_email', 'info@goldbricks.com') }}",
       "sameAs": [
         "{{ \App\Models\Setting::get('social_facebook', '') }}",
         "{{ \App\Models\Setting::get('social_instagram', '') }}"
@@ -155,7 +155,7 @@
     <nav class="navbar navbar-expand-lg main-navbar sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                Midland <span>Properti</span>
+                Goldbricks <span>Realtors</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -167,10 +167,17 @@
                             {{ $menu_home ?? 'Beranda' }}
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('project*') ? 'active' : '' }}" href="{{ route('project') }}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('project*') ? 'active' : '' }}" href="{{ route('project') }}" id="projectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $menu_project ?? 'Proyek' }}
                         </a>
+                        <ul class="dropdown-menu" aria-labelledby="projectDropdown">
+                            <li><a class="dropdown-item" href="{{ route('project') }}"><i class="bi bi-diagram-3 me-2"></i>Semua Proyek</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('project') }}?type=rumah"><i class="bi bi-house-fill me-2"></i>Real Estate</a></li>
+                            <li><a class="dropdown-item" href="{{ route('project') }}?type=komersial"><i class="bi bi-shop me-2"></i>Komersial</a></li>
+                            <li><a class="dropdown-item" href="{{ route('project') }}?type=tanah"><i class="bi bi-geo-fill me-2"></i>Kavling/Tanah</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}">
@@ -204,7 +211,7 @@
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <div class="footer-brand mb-3">Midland Properti</div>
+                    <div class="footer-brand mb-3">Goldbricks Realtors</div>
                     <p class="mb-3">{{ $site_tagline ?? 'Your Trusted Property Partner' }}. Kami berkomitmen menghadirkan properti terbaik untuk Anda dan keluarga.</p>
                     <div class="d-flex gap-3">
                         @php $instagram = \App\Models\Setting::get('social_instagram'); $facebook = \App\Models\Setting::get('social_facebook'); $whatsapp = \App\Models\Setting::get('social_whatsapp'); @endphp
@@ -243,11 +250,26 @@
             </div>
             <hr class="footer-divider my-4">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <p class="mb-0">&copy; {{ date('Y') }} Midland Properti. All rights reserved.</p>
-                <p class="mb-0">Powered by <span class="text-gold">Midland Properti</span></p>
+                <p class="mb-0">&copy; {{ date('Y') }} Goldbricks Realtors. All rights reserved.</p>
+                <p class="mb-0">Powered by <span class="text-gold">Goldbricks Realtors</span></p>
             </div>
         </div>
     </footer>
+
+    <!-- Sticky WhatsApp Button -->
+    @php
+        $whatsapp = \App\Models\Setting::get('social_whatsapp', '6281234567890');
+        $phone_clean = preg_replace('/\D/', '', $whatsapp);
+    @endphp
+    @if($phone_clean)
+    <a href="https://wa.me/{{ $phone_clean }}" target="_blank" title="Chat dengan WhatsApp"
+       class="sticky-whatsapp-btn"
+       style="position:fixed;bottom:2rem;right:2rem;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;box-shadow:0 4px 16px rgba(37,211,102,0.4);transition:all 0.3s;z-index:999;text-decoration:none"
+       onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 20px rgba(37,211,102,0.6)'"
+       onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 16px rgba(37,211,102,0.4)'">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')

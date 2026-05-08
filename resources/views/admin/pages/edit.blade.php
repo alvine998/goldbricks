@@ -30,7 +30,7 @@
                     <label class="form-label fw-medium">Subjudul Hero</label>
                     <input type="text" name="hero_subtitle" class="form-control"
                            value="{{ old('hero_subtitle', $page->hero_subtitle ?? '') }}"
-                           placeholder="Contoh: Bersama Midland Properti">
+                           placeholder="Contoh: Bersama Goldbricks Realtors">
                     <div class="form-text">Teks pendamping di bawah judul utama.</div>
                 </div>
                 <div class="col-12">
@@ -57,7 +57,7 @@
                     <label class="form-label fw-medium">Judul Seksi</label>
                     <input type="text" name="section_title" class="form-control"
                            value="{{ old('section_title', $page->section_title ?? '') }}"
-                           placeholder="Contoh: Tentang Midland Properti">
+                           placeholder="Contoh: Tentang Goldbricks Realtors">
                 </div>
                 <div class="col-12">
                     <label class="form-label fw-medium">Konten / Deskripsi</label>

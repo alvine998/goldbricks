@@ -45,4 +45,9 @@ class Project extends Model
     {
         return $this->hasMany(Property::class);
     }
+
+    public function agents()
+    {
+        return $this->belongsToMany(Agent::class)->orderBy('agent_project.sort_order');
+    }
 }

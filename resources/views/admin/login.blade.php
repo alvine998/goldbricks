@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin - Midland Properti</title>
+    <title>Login Admin - Goldbricks Realtors</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1a5c3a; --gold: #c9a84c; }
-        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--primary) 0%, #0d3321 100%); min-height: 100vh; display: flex; align-items: center; }
+        :root { --primary: #0f2d5e; --gold: #c9a84c; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, var(--primary) 0%, #071a3e 100%); min-height: 100vh; display: flex; align-items: center; }
         .login-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.3); max-width: 420px; width: 100%; }
         .login-header { background: var(--primary); padding: 2rem; text-align: center; }
         .brand { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gold); }
@@ -31,7 +31,7 @@
         <div class="col-12 col-sm-10 col-md-7 col-lg-5">
             <div class="login-card">
                 <div class="login-header">
-                    <div class="brand">Midland <span>Properti</span></div>
+                    <div class="brand">Goldbricks <span>Realtors</span></div>
                     <p class="text-white-50 mb-0 mt-1 small">CMS Admin Panel</p>
                 </div>
                 <div class="login-body">
@@ -45,7 +45,7 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-envelope text-muted"></i></span>
                                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                       value="{{ old('email') }}" placeholder="admin@midland.com" required autofocus>
+                                       value="{{ old('email') }}" placeholder="admin@goldbricks.com" required autofocus>
                             </div>
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -73,7 +73,7 @@
                         </button>
                     </form>
                     <p class="text-center text-muted small mt-4 mb-0">
-                        &copy; {{ date('Y') }} Midland Properti
+                        &copy; {{ date('Y') }} Goldbricks Realtors
                     </p>
                 </div>
             </div>

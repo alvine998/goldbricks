@@ -217,10 +217,6 @@
                                     <div class="text-muted small mb-1">Bagian dari Proyek:</div>
                                     <div class="fw-bold" style="color:var(--primary)">{{ $project->title }}</div>
                                 </div>
-
-                                <button class="btn btn-gold w-100 mb-2" data-bs-toggle="tab" data-bs-target="#hubungi">
-                                    <i class="bi bi-chat-dots me-2"></i>Hubungi Sekarang
-                                </button>
                                 <a href="{{ route('project.show', $project->slug) }}" class="btn btn-outline-secondary w-100">
                                     <i class="bi bi-arrow-left me-2"></i>Kembali ke Proyek
                                 </a>
@@ -242,23 +238,55 @@
 
                         <!-- Contact Methods -->
                         <div class="row g-4 mb-5">
-                            <!-- WhatsApp PIC -->
-                            @if($project->pic_phone)
-                            <div class="col-md-6">
-                                <div class="card border-0 shadow-sm h-100 transition-all" style="cursor:pointer" onclick="window.open('https://wa.me/{{ $project->pic_phone }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}', '_blank')">
-                                    <div class="card-body p-4 text-center">
-                                        <div class="mb-3">
-                                            <i class="bi bi-whatsapp" style="font-size:3rem;color:#25D366"></i>
+                            <!-- Agents from Project -->
+                            @php $agentsList = $project->agents()->limit(5)->get(); @endphp
+                            @if($agentsList->count() > 0)
+                                @foreach($agentsList as $agent)
+                                <div class="col-md-6">
+                                    <a href="https://wa.me/{{ $agent->whatsapp ?? \App\Models\Setting::get('social_whatsapp', '') }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}" target="_blank" style="text-decoration:none">
+                                        <div class="card border-0 shadow-sm h-100 transition-all" style="cursor:pointer">
+                                            <div class="card-body p-4 text-center">
+                                                <div class="mb-3">
+                                                    @if($agent->photo)
+                                                        <img src="{{ str_starts_with($agent->photo, 'http') ? $agent->photo : asset('storage/' . $agent->photo) }}" class="rounded-circle" style="width:80px;height:80px;object-fit:cover;border:3px solid var(--gold)" alt="{{ $agent->name }}">
+                                                    @else
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width:80px;height:80px;background:var(--primary);color:white;font-size:2rem;border:3px solid var(--gold)">
+                                                            {{ substr($agent->name, 0, 1) }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <h5 class="card-title mb-1" style="color:var(--primary)">{{ $agent->name }}</h5>
+                                                <p class="text-muted small mb-3">{{ $agent->position }}</p>
+                                                @if($agent->whatsapp)
+                                                    <p class="text-muted small mb-0"><i class="bi bi-telephone me-2"></i>{{ substr($agent->whatsapp, -10) }}</p>
+                                                @endif
+                                                <div class="mt-3">
+                                                    <span class="badge bg-success">
+                                                        <i class="bi bi-whatsapp me-1"></i>Chat
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h5 class="card-title mb-1">{{ $project->pic_name ?? 'Tim Kami' }}</h5>
-                                        <p class="text-muted small mb-3">Sales Professional</p>
-                                        <p class="text-muted small mb-0"><i class="bi bi-telephone me-2"></i>{{ $project->pic_phone }}</p>
-                                        <div class="mt-3">
-                                            <span class="badge bg-success">Biasanya Online</span>
+                                    </a>
+                                </div>
+                                @endforeach
+                            @elseif($project->pic_phone)
+                                <!-- Fallback to PIC if no agents -->
+                                <div class="col-md-6">
+                                    <div class="card border-0 shadow-sm h-100 transition-all" style="cursor:pointer" onclick="window.open('https://wa.me/{{ $project->pic_phone }}?text=Halo%2C%20saya%20tertarik%20dengan%20{{ urlencode($property->title) }}%20di%20proyek%20{{ urlencode($project->title) }}', '_blank')">
+                                        <div class="card-body p-4 text-center">
+                                            <div class="mb-3">
+                                                <i class="bi bi-whatsapp" style="font-size:3rem;color:#25D366"></i>
+                                            </div>
+                                            <h5 class="card-title mb-1">{{ $project->pic_name ?? 'Tim Kami' }}</h5>
+                                            <p class="text-muted small mb-3">Sales Professional</p>
+                                            <p class="text-muted small mb-0"><i class="bi bi-telephone me-2"></i>{{ $project->pic_phone }}</p>
+                                            <div class="mt-3">
+                                                <span class="badge bg-success">Biasanya Online</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endif
 
                             <!-- WhatsApp Support -->
@@ -270,7 +298,7 @@
                                         <div class="mb-3">
                                             <i class="bi bi-whatsapp" style="font-size:3rem;color:#25D366"></i>
                                         </div>
-                                        <h5 class="card-title mb-1">Midland Properti</h5>
+                                        <h5 class="card-title mb-1">Goldbricks Realtors</h5>
                                         <p class="text-muted small mb-3">Customer Service</p>
                                         <p class="text-muted small mb-0"><i class="bi bi-telephone me-2"></i>{{ $whatsapp }}</p>
                                         <div class="mt-3">

@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class Bank extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'image',
-        'images',
-        'description',
+        'name',
+        'logo',
+        'link',
         'sort_order',
-    ];
-
-    protected $casts = [
-        'images' => 'array',
     ];
 }

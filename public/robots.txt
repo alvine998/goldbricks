@@ -22,4 +22,4 @@ User-agent: Googlebot-Image
 Allow: /
 
 # Sitemap location
-Sitemap: https://midlandproperti.local/sitemap.xml
+Sitemap: https://goldbricks.local/sitemap.xml
