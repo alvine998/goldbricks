@@ -85,10 +85,55 @@
                                placeholder="+62 21-xxxx-xxxx">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-medium small">Alamat</label>
-                        <textarea name="contact_address" class="form-control" rows="2" maxlength="300"
-                                  placeholder="Jl. Sudirman No. 1, Jakarta">{{ old('contact_address', $settings['contact_address'] ?? '') }}</textarea>
+                        <label class="form-label fw-medium small">Alamat (dapat lebih dari satu)</label>
+                        <div id="addressList">
+                            @php
+                                $addresses = [];
+                                $existing = $settings['contact_address'] ?? '';
+                                if (!empty($existing)) {
+                                    $decoded = json_decode($existing, true);
+                                    $addresses = is_array($decoded) ? $decoded : [$existing];
+                                }
+                            @endphp
+                            @forelse($addresses as $addr)
+                            <div class="input-group mb-2">
+                                <input type="text" name="contact_addresses[]" class="form-control" maxlength="300"
+                                       placeholder="Jl. Sudirman No. 1, Jakarta" value="{{ $addr }}">
+                                <button type="button" class="btn btn-outline-danger" onclick="removeAddress(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                            @empty
+                            <div class="input-group mb-2">
+                                <input type="text" name="contact_addresses[]" class="form-control" maxlength="300"
+                                       placeholder="Jl. Sudirman No. 1, Jakarta">
+                                <button type="button" class="btn btn-outline-danger" onclick="removeAddress(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                            @endforelse
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="addAddress()">
+                            <i class="bi bi-plus me-1"></i>Tambah Alamat
+                        </button>
                     </div>
+                    <script>
+                    function addAddress() {
+                        const html = `
+                            <div class="input-group mb-2">
+                                <input type="text" name="contact_addresses[]" class="form-control" maxlength="300"
+                                       placeholder="Jl. Sudirman No. 1, Jakarta">
+                                <button type="button" class="btn btn-outline-danger" onclick="removeAddress(this)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        document.getElementById('addressList').insertAdjacentHTML('beforeend', html);
+                    }
+                    function removeAddress(btn) {
+                        btn.parentElement.remove();
+                    }
+                    </script>
                     <div class="mb-3">
                         <label class="form-label fw-medium small">WhatsApp <span class="text-muted">(format: 628xxxxxxxxxx)</span></label>
                         <input type="text" name="social_whatsapp" class="form-control" maxlength="20"

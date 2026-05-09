@@ -41,20 +41,20 @@
     <div class="container">
         <div class="row g-3 text-center">
             <div class="col-6 col-md-3">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Properti Terjual</div>
+                <div class="stat-number">{{ \App\Models\Setting::get('stat_properties_sold', '500') }}+</div>
+                <div class="stat-label">{{ \App\Models\Setting::get('stat_label_properties', 'Properti Terjual') }}</div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="stat-number">{{ \App\Models\Project::count() }}+</div>
-                <div class="stat-label">Proyek Aktif</div>
+                <div class="stat-label">{{ \App\Models\Setting::get('stat_label_projects', 'Proyek Aktif') }}</div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Tahun Pengalaman</div>
+                <div class="stat-number">{{ \App\Models\Setting::get('stat_years_experience', '15') }}+</div>
+                <div class="stat-label">{{ \App\Models\Setting::get('stat_label_experience', 'Tahun Pengalaman') }}</div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Klien Puas</div>
+                <div class="stat-number">{{ \App\Models\Setting::get('stat_clients', '1000') }}+</div>
+                <div class="stat-label">{{ \App\Models\Setting::get('stat_label_clients', 'Klien Puas') }}</div>
             </div>
         </div>
     </div>
@@ -170,17 +170,20 @@
     <div class="container">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <span class="section-badge">Mengapa Kami</span>
-                <h2 class="section-title">Dipercaya oleh Ribuan Keluarga Indonesia</h2>
+                <span class="section-badge">{{ \App\Models\Setting::get('whyus_badge', 'Mengapa Kami') }}</span>
+                <h2 class="section-title">{{ \App\Models\Setting::get('whyus_title', 'Dipercaya oleh Ribuan Keluarga Indonesia') }}</h2>
                 <div class="divider-gold"></div>
-                <p class="text-muted mb-4">Goldbricks Realtors telah melayani pelanggan selama lebih dari satu dekade dengan komitmen terhadap kualitas, kepercayaan, dan kepuasan klien.</p>
+                <p class="text-muted mb-4">{{ \App\Models\Setting::get('whyus_desc', 'Goldbricks Realtors telah melayani pelanggan selama lebih dari satu dekade dengan komitmen terhadap kualitas, kepercayaan, dan kepuasan klien.') }}</p>
                 <div class="row g-3">
-                    @foreach([
-                    ['icon' => 'shield-check', 'title' => 'Terpercaya & Berpengalaman', 'desc' => 'Lebih dari 15 tahun melayani kebutuhan properti Indonesia.'],
-                    ['icon' => 'geo-alt', 'title' => 'Lokasi Strategis', 'desc' => 'Properti di lokasi terbaik dengan aksesibilitas tinggi.'],
-                    ['icon' => 'people', 'title' => 'Tim Profesional', 'desc' => 'Agen berpengalaman siap membantu Anda 24/7.'],
-                    ['icon' => 'award', 'title' => 'Penghargaan Bergengsi', 'desc' => 'Meraih berbagai penghargaan sebagai agen properti terbaik.'],
-                    ] as $item)
+                    @php
+                    $whyus_items = [
+                        ['icon' => 'shield-check', 'title' => \App\Models\Setting::get('whyus_1_title', 'Terpercaya & Berpengalaman'), 'desc' => \App\Models\Setting::get('whyus_1_desc', 'Lebih dari 15 tahun melayani kebutuhan properti Indonesia.')],
+                        ['icon' => 'geo-alt',       'title' => \App\Models\Setting::get('whyus_2_title', 'Lokasi Strategis'),           'desc' => \App\Models\Setting::get('whyus_2_desc', 'Properti di lokasi terbaik dengan aksesibilitas tinggi.')],
+                        ['icon' => 'people',        'title' => \App\Models\Setting::get('whyus_3_title', 'Tim Profesional'),             'desc' => \App\Models\Setting::get('whyus_3_desc', 'Agen berpengalaman siap membantu Anda 24/7.')],
+                        ['icon' => 'award',         'title' => \App\Models\Setting::get('whyus_4_title', 'Penghargaan Bergengsi'),       'desc' => \App\Models\Setting::get('whyus_4_desc', 'Meraih berbagai penghargaan sebagai agen properti terbaik.')],
+                    ];
+                    @endphp
+                    @foreach($whyus_items as $item)
                     <div class="col-6">
                         <div class="d-flex gap-3">
                             <div class="flex-shrink-0 mt-1">
@@ -235,10 +238,10 @@
 <section class="py-5" style="background:var(--light-bg)">
     <div class="container">
         <div class="text-center mb-5">
-            <span class="section-badge">Dukungan Finansial</span>
-            <h2 class="section-title">Bank Partner KPR Kami</h2>
+            <span class="section-badge">{{ \App\Models\Setting::get('bank_badge', 'Dukungan Finansial') }}</span>
+            <h2 class="section-title">{{ \App\Models\Setting::get('bank_title', 'Bank Partner KPR Kami') }}</h2>
             <div class="divider-gold center"></div>
-            <p class="text-muted mx-auto" style="max-width:500px">Kami bekerja sama dengan bank-bank terpercaya untuk memudahkan Anda mendapatkan pembiayaan properti impian.</p>
+            <p class="text-muted mx-auto" style="max-width:500px">{{ \App\Models\Setting::get('bank_subtitle', 'Kami bekerja sama dengan bank-bank terpercaya untuk memudahkan Anda mendapatkan pembiayaan properti impian.') }}</p>
         </div>
         <div class="row g-4 align-items-center justify-content-center">
             @foreach($banks as $bank)
@@ -269,10 +272,10 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <span class="section-badge">Kepercayaan Klien</span>
-            <h2 class="section-title">Testimoni Pelanggan Kami</h2>
+            <span class="section-badge">{{ \App\Models\Setting::get('testimonial_badge', 'Kepercayaan Klien') }}</span>
+            <h2 class="section-title">{{ \App\Models\Setting::get('testimonial_title', 'Testimoni Pelanggan Kami') }}</h2>
             <div class="divider-gold center"></div>
-            <p class="text-muted mx-auto" style="max-width:500px">Ribuan pelanggan puas telah menemukan properti impian mereka bersama Goldbricks Realtors.</p>
+            <p class="text-muted mx-auto" style="max-width:500px">{{ \App\Models\Setting::get('testimonial_subtitle', 'Ribuan pelanggan puas telah menemukan properti impian mereka bersama Goldbricks Realtors.') }}</p>
         </div>
         <div class="row g-4">
             @foreach($testimonials as $testimonial)

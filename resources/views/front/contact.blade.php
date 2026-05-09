@@ -29,17 +29,24 @@
 
                 <div class="d-flex flex-column gap-3">
                     @php
-                        $address = \App\Models\Setting::get('contact_address');
+                        $addressJson = \App\Models\Setting::get('contact_address');
+                        $addresses = [];
+                        if (!empty($addressJson)) {
+                            $decoded = json_decode($addressJson, true);
+                            $addresses = is_array($decoded) ? $decoded : [$addressJson];
+                        }
                         $phone   = \App\Models\Setting::get('contact_phone');
                         $email   = \App\Models\Setting::get('contact_email');
                         $wa      = \App\Models\Setting::get('social_whatsapp');
                     @endphp
-                    @if($address)
+                    @if(!empty($addresses))
                     <div class="d-flex gap-3 align-items-start">
                         <div class="contact-icon flex-shrink-0"><i class="bi bi-geo-alt"></i></div>
                         <div>
                             <div class="fw-semibold" style="color:var(--primary)">Alamat</div>
-                            <div class="text-muted">{{ $address }}</div>
+                            @foreach($addresses as $addr)
+                                <div class="text-muted">{{ $addr }}</div>
+                            @endforeach
                         </div>
                     </div>
                     @endif

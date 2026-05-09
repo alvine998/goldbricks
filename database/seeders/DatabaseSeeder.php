@@ -40,7 +40,9 @@ class DatabaseSeeder extends Seeder
             'menu_contact'    => 'Kontak',
             'contact_email'   => 'info@goldbricks.co.id',
             'contact_phone'   => '+62 21-1234-5678',
-            'contact_address' => 'Jl. Sudirman No. 88, Jakarta Pusat 10220',
+            'contact_address' => json_encode([
+                'Jl. Sudirman No. 88, Jakarta Pusat 10220',
+            ]),
             'social_whatsapp' => '6281234567890',
             'social_instagram'=> 'https://instagram.com/goldbricksrealtors',
             'social_facebook' => 'https://facebook.com/goldbricksrealtors',

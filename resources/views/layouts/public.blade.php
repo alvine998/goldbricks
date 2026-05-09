@@ -137,7 +137,7 @@
       "url": "{{ route('home') }}",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "{{ \App\Models\Setting::get('contact_address', 'Jl. Sudirman No. 88, Jakarta Pusat 10220') }}",
+        "streetAddress": "@php $addressJson = \App\Models\Setting::get('contact_address', 'Jl. Sudirman No. 88, Jakarta Pusat 10220'); $addresses = is_array(json_decode($addressJson, true)) ? json_decode($addressJson, true) : [$addressJson]; echo $addresses[0] ?? $addressJson; @endphp",
         "addressCountry": "ID"
       },
       "telephone": "{{ \App\Models\Setting::get('contact_phone', '+62 21-1234-5678') }}",
@@ -242,8 +242,19 @@
                 </div>
                 <div class="col-lg-3">
                     <h6>Kontak</h6>
-                    @php $address = \App\Models\Setting::get('contact_address'); $phone = \App\Models\Setting::get('contact_phone'); $email = \App\Models\Setting::get('contact_email'); @endphp
-                    @if($address)<p class="mb-2"><i class="bi bi-geo-alt me-2 text-gold"></i>{{ $address }}</p>@endif
+                    @php
+                        $addressJson = \App\Models\Setting::get('contact_address');
+                        $addresses = [];
+                        if (!empty($addressJson)) {
+                            $decoded = json_decode($addressJson, true);
+                            $addresses = is_array($decoded) ? $decoded : [$addressJson];
+                        }
+                        $phone = \App\Models\Setting::get('contact_phone');
+                        $email = \App\Models\Setting::get('contact_email');
+                    @endphp
+                    @foreach($addresses as $addr)
+                        @if($addr)<p class="mb-2"><i class="bi bi-geo-alt me-2 text-gold"></i>{{ $addr }}</p>@endif
+                    @endforeach
                     @if($phone)<p class="mb-2"><i class="bi bi-telephone me-2 text-gold"></i>{{ $phone }}</p>@endif
                     @if($email)<p class="mb-2"><i class="bi bi-envelope me-2 text-gold"></i>{{ $email }}</p>@endif
                 </div>

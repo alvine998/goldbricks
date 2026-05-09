@@ -26,15 +26,24 @@ class SettingController extends Controller
             'menu_contact' => 'required|string|max:50',
             'contact_email'   => 'nullable|email|max:100',
             'contact_phone'   => 'nullable|string|max:30',
-            'contact_address' => 'nullable|string|max:300',
+            'contact_addresses' => 'nullable|array',
+            'contact_addresses.*' => 'nullable|string|max:300',
             'social_instagram' => 'nullable|string|max:200',
             'social_facebook'  => 'nullable|string|max:200',
             'social_whatsapp'  => 'nullable|string|max:20',
         ]);
 
-        foreach ($request->except(['_token', '_method']) as $key => $value) {
+        $data = $request->except(['_token', '_method', 'contact_addresses']);
+        
+        foreach ($data as $key => $value) {
             Setting::set($key, $value);
         }
+
+        // Store addresses as JSON array, filtering out empty strings
+        $addresses = array_filter($request->input('contact_addresses', []), function($addr) {
+            return !empty(trim($addr));
+        });
+        Setting::set('contact_address', json_encode(array_values($addresses)));
 
         return back()->with('success', 'Pengaturan berhasil disimpan.');
     }
